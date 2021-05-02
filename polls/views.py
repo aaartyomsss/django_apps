@@ -1,20 +1,40 @@
-from django.http import HttpResponse, Http404
-from .models import Question
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.views import generic
+from django.urls import reverse
 
-def index(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    context = { 'latest_question_list': latest_question_list }  # The context is a dictionary mapping template variable names to Python objects.
-    return render(request, 'polls/index.html', context)
+from .models import Question, Choice
 
-def detail(request, question_id):
-    question = get_object_or_404(Question, pk=question_id) # shortcut to avoid try-catch
-    return render(request, 'polls/details.html', { 'question': question })
 
-def result(request, question_id):
-    response = "You are looking at the results of question %s"
-    return HttpResponse(response % question_id)
+class IndexView(generic.ListView):
+    template_name = 'polls/index.html'
+    context_object_name = 'latest_question_list'
+
+    def get_queryset(self):
+        return Question.objects.order_by('-pub_date')[:5]
+
+
+class DetailView(generic.DetailView):
+    model = Question
+    template_name = 'polls/details.html'
+
+
+class ResultsView(generic.DetailView):
+    model = Question
+    template_name = 'polls/results.html'
+
 
 def vote(request, question_id):
-    return HttpResponse("You are voting on question %s" % question_id)
+    question = get_object_or_404(Question, pk=question_id)
+    try:
+        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+    except (KeyError, Choice.DoesNotExist):
+        return render(request, 'polls/detail.html', {
+            'question': question,
+            'error_message': 'You have not selected an answer'
+        })
+    else:
+        selected_choice.votes += 1
+        selected_choice.save()
+        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
