@@ -10,7 +10,10 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    <a href="{% url 'polls:index' %}">Home</a>
+    <nav>
+        <a href="{% url 'polls:index' %}">Home</a>
+        <a href="{% url 'polls:index' %}">Polls</a>
+    </nav>
     {% block body %}{% endblock %}
 </body>
 </html>
