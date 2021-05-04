@@ -1,18 +1,18 @@
-<html>
-<head>
-    <title>My first django page</title>
-    <meta name="django_app">
+{% extends "polls/_base.html" %}
 
-</head>
-<body>
+    {% block head %}
+        <title>Polls</title>
+    {% endblock %}
+
+{% block body %}
+    <h1>Polls</h1>
     {% if latest_question_list %}
         <ul>
         {% for question in latest_question_list %}
-            <li><a href="{url 'polls:detail' question.id}">{{question.question_text}}</a></li>
+            <li><a href="{% url 'polls:detail' question.id %}">{{question.question_text}}</a></li>
         {% endfor %}
         </ul>
     {% else %}
         <p>No polls are available.</p>
     {% endif %}
-</body>
-</html>
+{% endblock %}

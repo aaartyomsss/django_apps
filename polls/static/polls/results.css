@@ -1,0 +1,29 @@
+#vote-again-container {
+    display: block;
+    border-radius: 10px;
+    width: 150px;
+    height: 60px;
+    text-align: center;
+    color: white;
+    background-color: #1338BE;
+    margin-left: 2rem;
+    position: relative;
+}
+
+#vote-again-link {
+    color: white;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+}
+
+.results-list {
+    padding-left: 3.5rem;
+}
+
+.result-item {
+    margin: 20px 0;
+}

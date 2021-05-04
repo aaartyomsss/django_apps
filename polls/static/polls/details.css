@@ -1,0 +1,27 @@
+.form {
+    padding: 20px 0 0 2rem;
+}
+
+.form-label {
+    display: block;
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input[type=submit] {
+    background-color: #1338BE;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 12px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px
+}

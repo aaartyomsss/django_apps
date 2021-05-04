@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ question.question_text }}</title>
-</head>
-<body>
-
+{% extends 'polls/_base.html' %}
+{% load static %}
+    {% block head %}
+        <link rel="stylesheet" type="text/css" href="{% static 'polls/results.css' %}">
+        <title>{{ question.question_text }}</title>
+    {% endblock %}
+{% block body %}
   <h1>{{ question.question_text }}</h1>
-  {% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- has {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-  {% endfor %}
-
-  <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
-</body>
-</html>
+  <ul class="results-list">
+      {% for choice in question.choice_set.all %}
+        <li class="result-item">{{ choice.choice_text }} -- has {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+      {% endfor %}
+  </ul>
+    <div id="vote-again-container">
+        <a href="{% url 'polls:detail' question.id %}" id="vote-again-link">Vote again</a>
+    </div>
+{% endblock %}
