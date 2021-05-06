@@ -1,0 +1,31 @@
+{% extends 'todo/_base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'todo/registration.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <div class="centering-div">
+            <h2>Registration Form</h2>
+            <form method="post" id="registration-form">
+                {% csrf_token %}
+                {% for field in form %}
+                  <p>
+                    <span class="form-label">
+                        {{ field.label_tag }}
+                    </span>
+                    <span class="form-field">
+                        {{ field }}
+                    </span>
+                    {% for error in field.errors %}
+                      <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                  </p>
+                {% endfor %}
+                <button type="submit" class="button">Sing up</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
