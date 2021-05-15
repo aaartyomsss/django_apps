@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'polls.apps.PollsConfig',
     'homepage.apps.HomepageConfig',
-    'todo.apps.TodoConfig'
+    'todo.apps.TodoConfig',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
